@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div id="landing-page">
+    {{ range (where .Site.RegularPages "Section" "landingpage").ByWeight }}
+    {{ partial "section.html" . }}
+    {{ end }}
+
+    <section id="latest-posts" class="landing-section preset-default">
+        <div class="container">
+            <h2 class="section-title">Latest Blog <span class="text-primary">Posts</span></h2>
+            <div class="blog-grid">
+                {{ range first 3 (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+                <article class="blog-card">
+                    {{ with .Params.image }}
+                    <div class="blog-card-image">
+                        <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+                    </div>
+                    {{ end }}
+                    <div class="blog-card-content">
+                        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                        <p>{{ .Summary | truncate 100 }}</p>
+                        <a href="{{ .Permalink }}" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+            <div class="view-all">
+                <a href="/posts" class="btn btn-primary">View All Posts</a>
+            </div>
+        </div>
+    </section>
+</div>
+{{ end }}

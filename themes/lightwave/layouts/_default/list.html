@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="container fade-in">
+    <article class="blog-archive subpage-content">
+        <h1 class="archive-title">Pulse <span class="text-accent-purple">Blog</span></h1>
+        <div class="blog-list-vertical">
+            {{ range .Paginator.Pages.ByDate.Reverse }}
+            <article class="blog-item">
+                {{ with .Params.image }}
+                <div class="blog-item-image">
+                    <a href="{{ $.Permalink }}"><img src="{{ . | relURL }}" alt="{{ $.Title }}"></a>
+                </div>
+                {{ end }}
+                <div class="blog-item-content">
+                    <h2 class="blog-item-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+                    <div class="blog-item-meta">
+                        <span class="date">{{ .Date.Format "January 2, 2006" }}</span>
+                    </div>
+                    <p class="blog-item-summary">{{ .Summary | truncate 200 }}</p>
+                    <a href="{{ .Permalink }}" class="read-more">Read More →</a>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+        {{ partial "pagination.html" . }}
+    </article>
+</div>
+{{ end }}

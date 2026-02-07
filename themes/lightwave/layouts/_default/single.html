@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="container fade-in">
+    <article class="single-post subpage-content">
+        <header class="post-header">
+            <h1 class="post-title">{{ .Title }}</h1>
+            {{ if (eq .Section "posts") }}
+            <div class="post-meta">
+                <time>{{ .Date.Format "Jan 2, 2006" }}</time>
+            </div>
+            {{ end }}
+            {{ with .Params.image }}
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="blog-post-hero">
+            {{ end }}
+        </header>
+
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+
+        {{ if (eq .Section "posts") }}
+        <footer class="post-footer">
+            <a href="/posts" class="back-link">← Back to Blog</a>
+        </footer>
+        {{ end }}
+    </article>
+</div>
+{{ end }}

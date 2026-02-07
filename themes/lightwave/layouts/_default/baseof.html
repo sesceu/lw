@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    {{ $style := resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    {{ block "head" . }}{{ end }}
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ .Site.BaseURL }}" class="logo">{{ .Site.Title }}</a>
+                <ul class="nav-links">
+                    {{ range .Site.Menus.main }}
+                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="bg-animation-container">
+        <svg class="wave-svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.2" />
+                    <stop offset="50%" style="stop-color:var(--accent-blue);stop-opacity:0.2" />
+                    <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.2" />
+                </linearGradient>
+            </defs>
+            <path class="wave-path wave-1" d="M0,160 C320,300 420,0 720,160 C1020,320 1120,20 1440,160 V320 H0 Z" />
+            <path class="wave-path wave-2" d="M0,100 C280,250 480,50 720,200 C960,350 1160,100 1440,250 V320 H0 Z" />
+            <path class="wave-path wave-3" d="M0,220 C350,150 550,280 720,120 C890,-40 1090,180 1440,80 V320 H0 Z" />
+        </svg>
+    </div>
+
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. | <a
+                    href="/impressum">Impressum</a></p>
+        </div>
+    </footer>
+
+    {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}"></script>
+</body>
+
+</html>
