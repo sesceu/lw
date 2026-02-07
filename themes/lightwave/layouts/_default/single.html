@@ -19,7 +19,9 @@
 
         {{ if (eq .Section "posts") }}
         <footer class="post-footer">
-            <a href="{{ " /posts" | relURL }}" class="back-link">← Back to Blog</a>
+            {{ with .Site.GetPage "posts" }}
+            <a href="{{ .RelPermalink }}" class="back-link">← Back to Blog</a>
+            {{ end }}
         </footer>
         {{ end }}
     </article>

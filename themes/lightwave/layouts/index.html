@@ -24,7 +24,9 @@
                 {{ end }}
             </div>
             <div class="view-all">
-                <a href="{{ " /posts" | relURL }}" class="btn btn-primary">View All Posts</a>
+                {{ with .Site.GetPage "posts" }}
+                <a href="{{ .RelPermalink }}" class="btn btn-primary">View All Posts</a>
+                {{ end }}
             </div>
         </div>
     </section>

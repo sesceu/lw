@@ -10,6 +10,7 @@ theme = 'lightwave'
 [params]
   description = "A premium Hugo site for Lightwave Music & Event Company."
   author = "Lightwave Team"
+  logo = "img/lightwave_logo.svg"
 
 [markup]
   [markup.goldmark]

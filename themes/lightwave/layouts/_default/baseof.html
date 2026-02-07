@@ -18,7 +18,9 @@
     <header class="site-header">
         <nav class="navbar">
             <div class="container">
-                <a href="{{ .Site.BaseURL | relURL }}" class="logo">{{ .Site.Title }}</a>
+                <a href="{{ .Site.BaseURL | relURL }}" class="logo">
+                    <img src="{{ .Site.Params.logo | relURL }}" alt="{{ .Site.Title }}">
+                </a>
                 <ul class="nav-links">
                     {{ range .Site.Menus.main }}
                     <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -49,8 +51,8 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. | <a href="{{ " impressum" |
-                    relURL }}">Impressum</a></p>
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. | {{ with .Site.GetPage
+                "impressum" }}<a href="{{ .RelPermalink }}">Impressum</a>{{ end }}</p>
         </div>
     </footer>
 
