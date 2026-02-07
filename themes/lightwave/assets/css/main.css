@@ -358,6 +358,157 @@ section {
     margin-bottom: 2rem;
 }
 
+/* Timeline Section */
+.preset-timeline {
+    background: var(--bg-light);
+    padding: 10rem 0;
+    overflow: visible;
+}
+
+.preset-timeline .container {
+    max-width: 1000px;
+    position: relative;
+    padding: 0 2rem;
+}
+
+.preset-timeline .section-title {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.preset-timeline ol {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    counter-reset: step-counter;
+}
+
+/* Central Progress Line area */
+.preset-timeline ol::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(2rem + 23px);
+    /* Center of first circle */
+    bottom: calc(2rem + 23px);
+    /* Center of last circle area */
+    width: 2px;
+    background: rgba(121, 40, 202, 0.1);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.preset-timeline ol::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(2rem + 23px);
+    width: 2px;
+    max-height: calc(100% - 4rem - 46px);
+    /* Distance between first and last circle centers */
+    height: var(--timeline-progress, 0%);
+    background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue));
+    box-shadow: 0 0 15px var(--accent-purple);
+    transform: translateX(-50%);
+    z-index: 2;
+    transition: height 0.1s ease-out;
+}
+
+
+.preset-timeline li {
+    position: relative;
+    width: 50%;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    z-index: 10;
+}
+
+/* Alternating Layout */
+.preset-timeline li:nth-child(odd) {
+    align-self: flex-start;
+    text-align: right;
+    padding-right: 4rem;
+}
+
+.preset-timeline li:nth-child(even) {
+    align-self: flex-end;
+    text-align: left;
+    padding-left: 4rem;
+}
+
+/* Step Circles */
+.preset-timeline li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    top: 2rem;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    border: 2px solid rgba(121, 40, 202, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    z-index: 3;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.preset-timeline li:nth-child(odd)::before {
+    right: -23px;
+}
+
+.preset-timeline li:nth-child(even)::before {
+    left: -23px;
+}
+
+/* Active State for Circles */
+.preset-timeline li.active::before {
+    border-color: var(--accent-purple);
+    background: var(--accent-purple);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(121, 40, 202, 0.4);
+    transform: scale(1.1);
+}
+
+.preset-timeline li strong {
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.preset-timeline li p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline-progress-container {
+        left: 30px;
+    }
+
+    .preset-timeline li {
+        width: 100%;
+        text-align: left !important;
+        padding-left: 70px !important;
+        padding-right: 0 !important;
+    }
+
+    .preset-timeline li::before {
+        left: 7px !important;
+        right: auto !important;
+    }
+}
+
 .preset-contact {
     background: var(--bg-alt);
     text-align: center;
