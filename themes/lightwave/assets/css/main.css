@@ -408,7 +408,9 @@ section {
     left: 50%;
     top: calc(2rem + var(--timeline-marker-center));
     width: var(--timeline-width);
-    max-height: calc(100% - 4rem - var(--timeline-marker-size));
+    /* Calculate height from center of first circle to center of last circle */
+    /* Total height minus top offset and bottom offset */
+    max-height: calc(100% - (2 * (2rem + var(--timeline-marker-center))));
     height: var(--timeline-progress, 0%);
     background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue));
     box-shadow: 0 0 15px var(--accent-purple);
@@ -494,6 +496,10 @@ section {
     font-size: 1.15rem;
     color: var(--text-muted);
     line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.preset-timeline li:last-child {
     margin-bottom: 0;
 }
 

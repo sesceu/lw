@@ -15,21 +15,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const timelineItems = document.querySelectorAll('.preset-timeline li');
 
     if (timeline && timelineList) {
-        window.addEventListener('scroll', () => {
-            const rect = timelineList.getBoundingClientRect();
-            const viewHeight = window.innerHeight;
+        // Set initial --timeline-progress to 0
+        timelineList.style.setProperty('--timeline-progress', '0%');
 
-            // Calculate progress relative to the list bounds
-            const scrollStart = viewHeight * 0.5;
-            let progress = (scrollStart - rect.top) / rect.height;
+        window.addEventListener('scroll', () => {
+            if (timelineItems.length < 2) return;
+
+            const firstMarker = timelineItems[0].querySelector('::before'); // Not targetable directly, use box math
+            const markerSize = parseInt(getComputedStyle(timeline).getPropertyValue('--timeline-marker-size')) || 46;
+            const markerCenter = markerSize / 2;
+            const topOffset = parseFloat(getComputedStyle(timelineItems[0]).paddingTop) + markerCenter;
+
+            const firstMarkerRect = timelineItems[0].getBoundingClientRect();
+            const lastMarkerRect = timelineItems[timelineItems.length - 1].getBoundingClientRect();
+
+            const viewHeight = window.innerHeight;
+            const centerPoint = viewHeight * 0.5;
+
+            // scrollStart: when first marker center is at viewport center
+            const startY = firstMarkerRect.top + topOffset;
+            // scrollEnd: when last marker center is at viewport center
+            const endY = lastMarkerRect.top + topOffset;
+
+            let progress = (centerPoint - startY) / (endY - startY);
             progress = Math.max(0, Math.min(1, progress));
 
             timelineList.style.setProperty('--timeline-progress', `${progress * 100}%`);
 
-            // Activate markers
-            timelineItems.forEach((item) => {
+            // Activate markers based on their position relative to the viewport center
+            timelineItems.forEach((item, index) => {
                 const itemRect = item.getBoundingClientRect();
-                if (itemRect.top < viewHeight * 0.6) {
+                const itemCenter = itemRect.top + itemRect.height / 2;
+
+                // Activate if the item's center is above the viewport's 60% mark
+                if (itemCenter < viewHeight * 0.6) {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
