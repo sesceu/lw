@@ -1,9 +1,9 @@
 ---
-title: "Get in Touch"
-weight: 5
+title: "Sag Hallo!"
+weight: 60
 preset: "contact"
 bg_image: "img/contact_vibe.png"
-anchor: "contact"
+anchor: "kontakt"
 ---
 
 ## Ready to <span class="text-accent-purple">Light Up</span> the Night?

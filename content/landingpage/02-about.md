@@ -1,9 +1,9 @@
 ---
-title: "About Us"
-weight: 2
+title: "Über Uns"
+weight: 20
 preset: "about"
 bg_image: "img/about_vibe.png"
-anchor: "about"
+anchor: "über-uns"
 ---
 ## Wer wir sind
 

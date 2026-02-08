@@ -1,9 +1,9 @@
 ---
-title: "Welcome to Lightwave"
-weight: 1
+title: "Lightwave Events"
+weight: 10
 preset: "hero"
 bg_image: "img/hero_vibe.png"
-anchor: "hero"
+anchor: "home"
 logo: "img/lightwave_logo.svg"
 ---
 

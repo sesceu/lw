@@ -1,6 +1,6 @@
 ---
 title: "Our Services"
-weight: 3
+weight: 30
 preset: "services"
 bg_image: "img/services_vibe.png"
 anchor: "services"
