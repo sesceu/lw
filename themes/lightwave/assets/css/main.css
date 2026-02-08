@@ -364,7 +364,7 @@ section {
     --timeline-marker-size: 46px;
     --timeline-marker-center: calc(var(--timeline-marker-size) / 2);
 
-    background: var(--bg-light);
+    background: var(--bg-alt);
     padding: 10rem 0;
     overflow: visible;
 }
