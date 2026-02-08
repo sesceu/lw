@@ -394,8 +394,11 @@ section {
     content: '';
     position: absolute;
     left: 50%;
+    /* Start: Top padding of li (2rem) + half of marker size (23px) */
     top: calc(2rem + var(--timeline-marker-center));
-    bottom: calc(2rem + var(--timeline-marker-center));
+    /* End: Total height - offsets for first and last marker centers */
+    /* ADJUST THIS: Increase the -110px if it's too long, decrease if too short */
+    height: calc(100% - (2 * (2rem + var(--timeline-marker-center))));
     width: var(--timeline-width);
     background: rgba(121, 40, 202, 0.1);
     transform: translateX(-50%);
@@ -408,8 +411,7 @@ section {
     left: 50%;
     top: calc(2rem + var(--timeline-marker-center));
     width: var(--timeline-width);
-    /* Calculate height from center of first circle to center of last circle */
-    /* Total height minus top offset and bottom offset */
+    /* Match the track height exactly */
     max-height: calc(100% - (2 * (2rem + var(--timeline-marker-center))));
     height: var(--timeline-progress, 0%);
     background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue));
@@ -496,6 +498,11 @@ section {
     font-size: 1.15rem;
     color: var(--text-muted);
     line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Ensure the line ends at the last marker center by removing trailing space */
+.preset-timeline li:last-child {
     margin-bottom: 0;
 }
 
